@@ -39,6 +39,20 @@
                     <option value="16">16</option>
                 </select>
             </div>
+            <div class="withspace">
+                <label class='eb_label' for='num'>Display scheme</label>
+                <select id='changedisplay' onchange='change_display()'>
+                    <option value="0">occupied-unoccupied</option>
+                    <option value="1" selected="selected">active-inactive</option>
+                </select>
+            </div>
+            <div class="withspace">
+                <label class='eb_label' for='num'>Checkerboard</label>
+                <select id='changeckbd' onchange='change_ckbd()'>
+                    <option value="0">OFF</option>
+                    <option value="1" selected="selected">ON</option>
+                </select>
+            </div>
 
             <div>
                 <center>

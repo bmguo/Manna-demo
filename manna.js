@@ -12,8 +12,10 @@ var gnnlist = null;
 
 var gN = 256;
 var gdensity = 2.0;
-var ghmax = 1
+var ghmax = 1;
 var gt = 0;
+var gdisplay = 1;
+var gckbd = 1;
 
 // display variables
 var c;
@@ -57,7 +59,7 @@ function gen_nnlist() {
 function convert_board() {
     gboard = [];
     for (var i = 0; i < gN * gN; i++) {
-        if (glattice[i] > ghmax) {
+        if (glattice[i] > ghmax * gdisplay) {
             gboard[i] = 1;
         } else {
             gboard[i] = -1;
@@ -106,8 +108,11 @@ function put_pixel(x, y, size, color){
 function display_board(N, board){
     for (var i=0; i<N; i++){
         for (var j=0; j<N; j++){
-            put_pixel(i, j, gpx_size, -board[i+j*N] * (2*(i%2)-1)*(2*(j%2)-1) * (2*(gt%2)-1));
-            // put_pixel(i, j, gpx_size, -board[i + j * N]);
+            if (gckbd > 0){
+                put_pixel(i, j, gpx_size, -board[i+j*N] * (2*(i%2)-1)*(2*(j%2)-1) * (2*(gt%2)-1));
+            } else {
+                put_pixel(i, j, gpx_size, -board[i+j*N]);
+            }
         }
     }
 }
@@ -231,6 +236,16 @@ function change_num(){
     init_board(gN, gdensity, ghmax);
 }
 
+function change_display(){
+    gdisplay = parseInt(document.getElementById('changedisplay').value);
+    convert_board();
+    draw_all();
+}
+
+function change_ckbd(){
+    gckbd = parseInt(document.getElementById('changeckbd').value);
+    draw_all();
+}
 
 
 var init = function() {
